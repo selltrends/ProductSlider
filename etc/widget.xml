@@ -11,8 +11,15 @@
 			<parameter name="title" xsi:type="text" required="true" visible="true">
 				<label translate="true">Title (frontend)</label>
 			</parameter>
-			<parameter name="category_id" xsi:type="text" required="true" visible="true">
-				<label translate="true">Category ID</label>
+			<parameter name="category_id" xsi:type="block" required="true" visible="true">
+				<label translate="true">Category</label>
+				<block class="Magento\Catalog\Block\Adminhtml\Category\Widget\Chooser">
+					<data>
+						<item name="button" xsi:type="array">
+							<item name="open" xsi:type="string">Select Category.</item>
+						</item>
+					</data>
+				</block>
 			</parameter>
 			<parameter name="template" xsi:type="select" required="true" visible="true">
 				<label translate="true">Template</label>
