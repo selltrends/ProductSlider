@@ -2,37 +2,40 @@
 	$productCollection = $block->getLoadedProductCollection();
 	$_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
-<div class="block block-product-slider slider-list">
+<div class="block widget block-products-list grid">
 	<div class="block-title">
-		<h2><?php echo $block->getTitle() ?></h2>
+		<strong><?php echo $block->getTitle() ?></strong>
 	</div>
 	<div class="block-content">
+		<div class="products-grid grid">
 		<?php if (count($productCollection)) : ?>
-			<div class="owl-carousel">
-				<?php foreach ($productCollection as $product): ?>
-					<div class="product">
-						<div class="product-image">
-							<a href="<?php echo $product->getProductUrl()?>">
+			<ol class="product-items widget-product-grid owl-carousel">
+			<?php foreach ($productCollection as $product): ?>
+				<li>
+					<div class="product-item-info">
+						<a href="<?php echo $product->getProductUrl()?>" class="product-item-photo">
 								<?php echo $block->getImage($product,'category_page_grid')->toHtml() ?>
-							</a>
+						</a>
+						<div class="product-item-details">
+							<strong class="product-item-name">
+								<a href="<?php echo $product->getProductUrl()?>" class="product-item-link">
+									<?php echo $_helper->productAttribute($product, $product->getName(),'name');?>
+								</a>
+							</strong>
+							<?php echo $block->getProductPrice($product) ?>
 						</div>
-						<strong class="product-name">
-							<a href="<?php echo $product->getProductUrl()?>">
-								<?php echo $_helper->productAttribute($product, $product->getName(),'name');?>
-							</a>
-						</strong>
-						<?php echo $block->getProductPrice($product) ?>
 					</div>
+				</li>
 				<?php endforeach;?>
-			</div>
+			</ol>
 		<?php endif;?>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
-require(['jquery','owl'], function($){
-	$(function(){
-		$(document).ready(function(){
-			  $(".owl-carousel").owlCarousel(
+require(['jquery','owl'], function(){
+	jQuery(document).ready(function(){
+		jQuery(".owl-carousel").owlCarousel(
 					  {
 						    loop:true,
 						    margin:10,
@@ -58,6 +61,5 @@ require(['jquery','owl'], function($){
 						}
 			);
 		});	
-	});
 });
 </script>
